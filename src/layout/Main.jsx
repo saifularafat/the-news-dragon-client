@@ -18,7 +18,7 @@ const Main = () => {
                     </Col>
                     
                     <Col lg={6}>
-                        <h2>Main Component Up coming....</h2>
+                        <Outlet />
                     </Col>
 
                     <Col lg={3}>

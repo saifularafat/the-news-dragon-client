@@ -23,7 +23,7 @@ const RightNave = () => {
                 </ListGroup>
             </div>
             <Qzone />
-            <div className='right-relative'>
+            <div className='right-relative mb-5'>
                 <div>
                     <img src={bg} alt="" className='w-100' />
                 </div>
