@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../../assets/logo.png'
 import moment from 'moment';
 import Marquee from "react-fast-marquee";
-import { Button, Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../../Provider/AuthProvider';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Header = () => {
+    const { user } = useContext(AuthContext)
     return (
         <Container>
             <div className='text-center mt-5'>
@@ -27,26 +30,26 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mx-auto fs-3">
-                            <Nav.Link href="#home">
-                                <Link to='/'>Home</Link>
-                            </Nav.Link>
-                            <Nav.Link href="#about">
-                                <Link to='about'>about</Link>
-                            </Nav.Link>
-                            <Nav.Link href="#career">
-                                <Link to='career'>Career</Link>
-                            </Nav.Link>
+                            <Link to='/' className='px-2'>Home</Link>
+                            <Link to='about' className='px-2'>about</Link>
+                            <Link to='career' className='px-2'>Career</Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#profile">Profile</Nav.Link>
-                            <Nav.Link eventKey={2} href="#login">
-                                Login
-                            </Nav.Link>
+                            {user && <Nav.Link href="#profile"><FaUserCircle style={{ fontSize: '2rem' }}></FaUserCircle></Nav.Link>}
+                            {user ? <Link to='/logout'>
+                                <Button variant="secondary">
+                                    Log Out
+                                </Button>
+                            </Link> :
+                                <Link to='/login'>
+                                    <Button variant="secondary">
+                                        Login
+                                    </Button>
+                                </Link>}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-
         </Container>
     );
 };
