@@ -8,9 +8,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({children}) => {
 
-    const user = {
-        displayName: 'saiful Arafat'
-    }
+    const user = null ;
 
     const authInfo = {
         user
