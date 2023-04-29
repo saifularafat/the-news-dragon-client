@@ -7,6 +7,7 @@ const Register = () => {
     const [registerError, setRegisterError] = useState();
     const [registerSuccess, setRegisterSuccess] = useState();
     const [showPassword, setShowPassword] = useState(false)
+    const [accepted, setAccepted] = useState(false)
 
     const { createUser, profile } = useContext(AuthContext)
 
@@ -37,6 +38,10 @@ const Register = () => {
             })
     }
 
+    const handlerAccepted = event => {
+        setAccepted(event.target.checked);
+    }
+
 
     return (
         <Container className='w-50 mx-auto border border-secondary-subtle p-5 mb-3 mt-0 rounded-2'>
@@ -44,24 +49,40 @@ const Register = () => {
             <Form onSubmit={handlerRegister}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" name='name' placeholder="Your Name" className='py-2' />
+                    <Form.Control 
+                    type="text" 
+                    name='name' 
+                    placeholder="Your Name" 
+                    required
+                    className='py-2' />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Photo Url</Form.Label>
-                    <Form.Control type="text" name='photo' placeholder="Photo url" className='py-2' />
+                    <Form.Control 
+                    type="text" 
+                    name='photo' 
+                    placeholder="Photo url" 
+                    required
+                    className='py-2' />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name='email' placeholder="Enter email" className='py-2' />
+                    <Form.Control 
+                    type="email"
+                    name='email' 
+                    placeholder="Enter email" 
+                    required
+                    className='py-2' />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control 
-                    type= { showPassword ? "text" : "password"}
-                    name='password' 
-                    placeholder="Password" 
-                    className='py-2' />
+                    <Form.Control
+                        type={showPassword ? "text" : "password"}
+                        name='password'
+                        placeholder="Password"
+                        required
+                        className='py-2' />
                 </Form.Group>
                 <Form.Text className="text-black ">
                     <p onClick={() => setShowPassword(!showPassword)}>
@@ -73,13 +94,21 @@ const Register = () => {
                     </p>
                 </Form.Text>
 
-                <Button variant="secondary" type="submit" className='w-100 fw-semibold fs-5 mb-3'>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check
+                        type="checkbox"
+                        name='accept'
+                        onClick={handlerAccepted}
+                        label={<>Accept <Link to='/terms'>Terms and Condition</Link></>} />
+                </Form.Group>
+
+                <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={!accepted}
+                    className='w-100 fw-semibold fs-5 mb-3'>
                     Register
                 </Button>
-
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
 
                 <Form.Text className="text-black">
                     <span>Already Have An Account ?</span><Link to='/login' className='text-success'>login</Link>

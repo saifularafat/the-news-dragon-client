@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Container, Form, Spinner } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../../Provider/AuthProvider';
 
@@ -13,7 +13,11 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/category/0'
 
-    const {logIn} = useContext(AuthContext);
+    const {logIn,loader} = useContext(AuthContext);
+
+    if(loader){
+        return <Spinner animation="border" variant="danger" />
+    }
 
     const handlerLogin = event => {
         event.preventDefault();
